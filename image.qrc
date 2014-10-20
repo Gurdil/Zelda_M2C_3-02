@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/zelda">
+        <file>Princesse_Zelda.png</file>
+    </qresource>
+    <qresource prefix="/BadGuy">
+        <file>cyclope1.png</file>
+        <file>cyclope2.png</file>
+        <file>cyclope3.png</file>
+        <file>cyclope4.png</file>
+    </qresource>
+</RCC>
