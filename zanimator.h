@@ -13,11 +13,12 @@ class Zanimator
 		~Zanimator();
 		QPixmap begin();
 		QPixmap next();
+        QPixmap current();
 	private:
 		int index;
 		int vitesse;
 		int time_lap;
-		QList<QPixmap> *pictures;
+        QList<QPixmap> pictures;
 };
 
 #endif // ZANIMATOR_H

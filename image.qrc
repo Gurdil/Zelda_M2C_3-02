@@ -8,4 +8,7 @@
         <file>cyclope3.png</file>
         <file>cyclope4.png</file>
     </qresource>
+    <qresource prefix="/map">
+        <file>map.png</file>
+    </qresource>
 </RCC>

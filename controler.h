@@ -7,27 +7,43 @@
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
 #include <QList>
+#include <QBitmap>
+#include <QColor>
+#include <iostream>
+
 #include "zscene.h"
+#include "zview.h"
 #include "zinit.h"
 #include "zanimator.h"
+#include "ZKeyRecorder.h"
+#include "zobject.h"
 
-class controler : public QObject
+class ZControler : public QObject
 {
-		Q_OBJECT
-	public:
-		explicit controler(QGraphicsView *view, QObject *parent = 0);
+        Q_OBJECT
+    public:
+        static ZControler* getInstance();
+        ZKeyRecorder getKeyRecorder();
 
 	signals:
 
 	public slots:
 		void updateCaption();
 
-	private:
-		QGraphicsView *view;
+    protected:
+        ZKeyRecorder keyRecorder;
+        Zview *view;
 		ZScene *scene;
 		Zanimator *a;
 		int var;
-		bool hop;
+        bool hop;
+        ZObject *avatar;
+        ZObject *vilain;
+        QPixmap map;
+        static ZControler* m_instance;
+
+
+        explicit ZControler(QObject *parent = 0);
 
 };
 

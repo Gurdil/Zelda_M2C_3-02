@@ -13,18 +13,21 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    mainwindow.cpp \
     controler.cpp \
     zscene.cpp \
     zanimator.cpp \
-    zinit.cpp
+    zview.cpp \
+    ZKeyRecorder.cpp \
+    zobject.cpp
 
 HEADERS  += \
-    mainwindow.h \
     controler.h \
     zscene.h \
     zanimator.h \
-    zinit.h
+    zinit.h \
+    zview.h \
+    ZKeyRecorder.h \
+    zobject.h
 
 OTHER_FILES +=
 

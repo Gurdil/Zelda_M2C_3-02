@@ -1,14 +1,20 @@
 #ifndef ZINIT_H
 #define ZINIT_H
 
-class ZInit
+namespace ZInit
 {
-	public:
-		ZInit();
-		static int getFrameRate(){return frameRate;}
+     enum Constante
+     {
+          frameRate = 17,
+     };
 
-	private:
-		const static int frameRate = 17;
-};
+     enum KeyInfo
+     {
+         up = 1,
+         down = up << 1,
+         right = down << 1,
+         left = right << 1
+     };
+}
 
 #endif // ZINIT_H
