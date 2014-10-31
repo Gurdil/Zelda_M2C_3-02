@@ -7,9 +7,9 @@ Zview::Zview(ZKeyRecorder &keyRecorder) : keyRecorder(keyRecorder)
     this->setTransformationAnchor(QGraphicsView::NoAnchor);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
-    //this->setFixedSize(QApplication::desktop()->width(), QApplication::desktop()->height());
-    //this->showFullScreen();
-    this->show();
+    this->setFixedSize(QApplication::desktop()->width(), QApplication::desktop()->height());
+    this->showFullScreen();
+
 }
 
 

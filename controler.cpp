@@ -33,10 +33,20 @@ ZControler::ZControler(QObject *parent) :
     addresses.append(":/BadGuy/cyclope4.png");
     //Zanimator anim = Zanimator(addresses);
 
-    vilain = new ZObject(Zanimator(addresses), 300,300);
-    avatar = new ZObject(Zanimator(addresses), 0,0);
 
-    map = QPixmap(":/map/map.jpg");
+    QString passMap = QApplication::applicationDirPath() + QString("/map.png");
+    map = QPixmap(passMap);
+
+
+//    avatar = new ZObject(Zanimator(addresses), map.width()/2,map.height()/2);
+//    vilain = new ZObject(Zanimator(addresses), avatar->getX()+300, avatar->getY()+300);
+
+    avatar = new ZObject(Zanimator(addresses), map.width()/2,map.height()/2);
+    addresses.clear();
+    addresses.append(":/three/arbre.png");
+    vilain = new ZObject(Zanimator(addresses), avatar->getX()+300, avatar->getY()+300);
+
+
 }
 
 ZKeyRecorder ZControler::getKeyRecorder()
@@ -51,6 +61,9 @@ void ZControler::updateCaption()
     int x = this->avatar->getX();
     int y = this->avatar->getY();
 
+    static int centerX = this->map.width()/2;
+    static int centerY = this->map.height()/2;
+
     if (keyRecorder.readkey() & ZInit::up)
     {
         this->avatar->setPos(x, y-1);
@@ -58,8 +71,6 @@ void ZControler::updateCaption()
         {
             this->avatar->setPos(x, y);
         }
-        QGraphicsPixmapItem *a = this->scene->addPixmap(this->avatar->getImage());
-        a->setPos(this->avatar->getX(),this->avatar->getY());
     }
     else if (keyRecorder.readkey() & ZInit::down)
     {
@@ -68,18 +79,15 @@ void ZControler::updateCaption()
         {
             this->avatar->setPos(x, y);
         }
-        QGraphicsPixmapItem *a = this->scene->addPixmap(this->avatar->getImage());
-        a->setPos(this->avatar->getX(),this->avatar->getY());
     }
     else if (keyRecorder.readkey() & ZInit::right)
     {
         this->avatar->setPos(x+1,y);
+        centerX++;
         if (this->avatar->collide(*(this->vilain), ZObject::rectangle))
         {
             this->avatar->setPos(x, y);
         }
-        QGraphicsPixmapItem *a = this->scene->addPixmap(this->avatar->getImage());
-        a->setPos(this->avatar->getX(),this->avatar->getY());
     }
     else if (keyRecorder.readkey() & ZInit::left)
     {
@@ -88,20 +96,22 @@ void ZControler::updateCaption()
         {
             this->avatar->setPos(x, y);
         }
-        QGraphicsPixmapItem *a = this->scene->addPixmap(this->avatar->getImage());
-        a->setPos(this->avatar->getX(),this->avatar->getY());
-    }
-    else
-    {
-        QGraphicsPixmapItem *a = this->scene->addPixmap(this->avatar->getImage());
-        a->setPos(this->avatar->getX(),this->avatar->getY());
     }
 
-    QGraphicsPixmapItem *a = this->scene->addPixmap(this->vilain->getImage());
-    a->setPos(this->vilain->getX(),this->vilain->getY());
 
-    a = this->scene->addPixmap(this->map);
-    a->setPos(0,0);
+    QGraphicsPixmapItem *map = this->scene->addPixmap(this->map);
+
+    QGraphicsPixmapItem *a = this->scene->addPixmap(this->avatar->getImage());
+    QGraphicsPixmapItem *b = this->scene->addPixmap(this->vilain->getImage());
+
+
+
+
+    map->setPos(-centerX + view->viewport()->width()/2, -centerY + view->viewport()->height()/2);
+    a->setPos(view->viewport()->width()/2 + (avatar->getX() - centerX)
+              ,view->viewport()->height()/2+ (avatar->getY() - centerY));
+    b->setPos(view->viewport()->width()/2 + (vilain->getX() - centerX)
+              ,view->viewport()->height()/2+ (vilain->getY() - centerY));
 
     this->view->viewport()->update();
 }

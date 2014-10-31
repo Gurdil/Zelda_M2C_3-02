@@ -22,12 +22,15 @@ public:
     int getX();
     int getY();
     void setPos(int x, int y);
+    void setOffset(int x, int y);
     QPixmap getImage();
 
 private:
     Zanimator animator;
     int x;
     int y;
+    int offsetX;
+    int offsetY;
 
     bool rectangleCollide(ZObject object);
     bool pixelCollide(ZObject object);

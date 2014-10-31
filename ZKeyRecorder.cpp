@@ -11,7 +11,6 @@ void ZKeyRecorder::setKey(int key)
     {
     case Qt::Key_Up:
         this->key |= ZInit::up;
-        std::cout << "ZkeyRecorder" << std::endl;
         break;
     case Qt::Key_Down:
         this->key |= ZInit::down;

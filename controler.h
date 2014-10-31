@@ -9,7 +9,9 @@
 #include <QList>
 #include <QBitmap>
 #include <QColor>
-#include <iostream>
+#include <QDir>
+#include <QString>
+#include <QDebug>
 
 #include "zscene.h"
 #include "zview.h"

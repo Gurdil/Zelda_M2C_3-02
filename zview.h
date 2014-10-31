@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QKeyEvent>
+#include <Qt>
 
 #include "ZKeyRecorder.h"
 

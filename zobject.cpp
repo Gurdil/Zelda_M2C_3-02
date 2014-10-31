@@ -29,6 +29,12 @@ void ZObject::setPos(int x, int y)
     this->y = y;
 }
 
+void ZObject::setOffset(int x, int y)
+{
+    this->offsetX = x;
+    this->offsetY = y;
+}
+
 QPixmap ZObject::getImage()
 {
     return animator.next();
@@ -36,9 +42,9 @@ QPixmap ZObject::getImage()
 
 bool ZObject::rectangleCollide(ZObject object)
 {
-    int x1 = this->x;
+    int x1 = this->x ;
     int x2 = object.x;
-    int y1 = this->y;
+    int y1 = this->y ;
     int y2 = object.y;
     int w1 = this->animator.current().width();
     int w2 = object.animator.current().width();
