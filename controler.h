@@ -19,6 +19,7 @@
 #include "zanimator.h"
 #include "ZKeyRecorder.h"
 #include "zobject.h"
+#include "zmap.h"
 
 class ZControler : public QObject
 {
@@ -41,8 +42,8 @@ class ZControler : public QObject
         bool hop;
         ZObject *avatar;
         ZObject *vilain;
-        QPixmap map;
         static ZControler* m_instance;
+        ZMap *map;
 
 
         explicit ZControler(QObject *parent = 0);

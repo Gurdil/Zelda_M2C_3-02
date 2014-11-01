@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     zanimator.cpp \
     zview.cpp \
     ZKeyRecorder.cpp \
-    zobject.cpp
+    zobject.cpp \
+    zmap.cpp
 
 HEADERS  += \
     controler.h \
@@ -27,7 +28,8 @@ HEADERS  += \
     zinit.h \
     zview.h \
     ZKeyRecorder.h \
-    zobject.h
+    zobject.h \
+    zmap.h
 
 OTHER_FILES +=
 
