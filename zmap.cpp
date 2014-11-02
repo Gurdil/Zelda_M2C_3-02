@@ -2,10 +2,6 @@
 
 ZMap::ZMap(Zview *view, ZScene *scene, ZObject *avatar, QString *adress) : view(view), scene(scene), avatar(avatar)
 {
-	QString passMap = QApplication::applicationDirPath() + QString("/map.png");
-	map = QPixmap(passMap);
-
-
 	centerX = this->map.width()/2;
 	centerY = this->map.height()/2;
 
@@ -13,6 +9,10 @@ ZMap::ZMap(Zview *view, ZScene *scene, ZObject *avatar, QString *adress) : view(
 	{
 		loadXML(*adress);
 	}
+	centerX = this->map.width()/2;
+	centerY = this->map.height()/2;
+
+	this->avatar->setPos(centerX, centerY);
 }
 
 void ZMap::loadXML(QString &adress)
@@ -190,7 +190,7 @@ void ZMap::paint()
 	}
 	else if (avatarY < (view->viewport()->height()/4))
 	{
-		centerY = avatar->getY() - view->viewport()->height()/4;
+		centerY = avatar->getY() + view->viewport()->height()/4;
 	}
 
 

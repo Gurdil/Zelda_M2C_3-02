@@ -36,7 +36,7 @@ ZControler::ZControler(QObject *parent) :
     avatar = new ZObject(Zanimator(addresses), 0, 0);
     vilain = new ZObject(Zanimator(addresses), avatar->getX()+300, avatar->getY()+300);
 
-	QString adress = QString(":/maptry/maptry.tmx");
+	QString adress = QString(":/maptry/maptry2.tmx");
 	map = new ZMap(view,scene,avatar, &adress);
 
 	timerChrono.start();
@@ -109,4 +109,5 @@ void ZControler::updateCaption()
 
     this->view->viewport()->update();
 	timer->setInterval(ZInit::frameRate-timerChrono.elapsed());
+	qDebug() << timerChrono.elapsed();
 }

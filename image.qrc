@@ -13,5 +13,15 @@
         <file>grass2.png</file>
         <file>maptry.tmx</file>
         <file>three.png</file>
+        <file>buisson.png</file>
+        <file>carreau.png</file>
+        <file>carreau2.png</file>
+        <file>fleur.png</file>
+        <file>FSAgrass.PNG</file>
+        <file>herbe2.png</file>
+        <file>rocher.png</file>
+        <file>maptry2.tmx</file>
+        <file>Arbre.png</file>
+        <file>Montain.png</file>
     </qresource>
 </RCC>
