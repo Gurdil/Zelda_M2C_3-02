@@ -47,8 +47,6 @@ ZKeyRecorder ZControler::getKeyRecorder()
 
 void ZControler::updateCaption()
 {
-    this->scene->clear();
-
     int x = this->avatar->getX();
     int y = this->avatar->getY();
 

@@ -20,6 +20,10 @@
 #include <QRect>
 #include <QDomNodeList>
 #include <QtMath>
+#include <QElapsedTimer>
+#include <QImage>
+#include <QRectF>
+#include <QPainter>
 
 class ZMap
 {
@@ -30,9 +34,11 @@ public:
 
 private:
     QList<ZObject> decors;
+	QList<QGraphicsItem *> decorsGraphic;
+	QPixmap map;
     QList<ZObject> obstacles;
-    QList<ZObject> livings;
-    QPixmap map;
+	QList<QGraphicsItem *> obstaclesGraphic;
+	QList<ZObject> livings;
     ZScene *scene;
     ZObject *avatar;
     Zview *view;
@@ -41,7 +47,7 @@ private:
 	QList<QPixmap> listImage;
 	int sizeX;
 	int sizeY;
-
+	QElapsedTimer myTimer;
 
     enum point{
         x,
@@ -49,10 +55,12 @@ private:
     };
 
     int transform(int a, point p);
-    void paintList(QList<ZObject> &list);
+	void paintList(const QList<ZObject> &list);
     bool collidList(ZObject &object, QList<ZObject> &list);
 	void loadXML(QString &file);
 	void load(QDomNodeList &nodes, QList<ZObject> &objects, int tilewidth, int tileheight, int width, int height);
+	QPixmap loadPixmap(QDomNodeList &nodes, int tilewidth, int tileheight, int width, int height);
+	void paintListBoosted(const QList<ZObject> &list, const QList<QGraphicsItem *> &listGraphic);
 };
 
 #endif // ZMAP_H
