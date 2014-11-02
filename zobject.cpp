@@ -9,7 +9,7 @@ bool ZObject::collide(ZObject object, deth level)
     switch (level)
     {
     case innerCircle:
-        return this->innerCircle(object);
+		return this->innerCircleCollide(object);
         break;
     case outerCircle:
         return true;

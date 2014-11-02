@@ -10,6 +10,8 @@ class Zanimator
 {
 	public:
 		Zanimator(QList<QString> addresses);
+		Zanimator(QList<QPixmap> pictures);
+		Zanimator(QPixmap picture);
 		~Zanimator();
 		QPixmap begin();
 		QPixmap next();
@@ -18,7 +20,7 @@ class Zanimator
 		int index;
 		int vitesse;
 		int time_lap;
-        QList<QPixmap> pictures;
+		QList<QPixmap> pictures;
 };
 
 #endif // ZANIMATOR_H

@@ -32,6 +32,7 @@ private:
     int offsetX;
     int offsetY;
 
+	bool innerCircleCollide(ZObject object);
     bool rectangleCollide(ZObject object);
     bool pixelCollide(ZObject object);
 
