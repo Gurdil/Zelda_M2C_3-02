@@ -1,19 +1,20 @@
-
 #ifndef ZAVATAR_H
 #define ZAVATAR_H
 
-#include <stdlib.h>
+#include <QList>
+#include <QString>
 
 #include "zanimator.h"
 #include "zobject.h"
+#include "ZKeyRecorder.h"
+#include "zmap.h"
 
 class ZAvatar : public ZObject
 {
 public:
-    ZAvatar(int x, int y);
-    ~ZAvatar();
+	ZAvatar(int x, int y, ZKeyRecorder *keyRecorder, ZMap *map);
 
-    enum action{
+	enum Action{
         STAND,
         WALK,
         ATTACK,
@@ -21,39 +22,35 @@ public:
         DEAD
     };
 
-    enum currentPos{
+	enum Position{
         DOWN,
         LEFT,
         UP,
         RIGHT
     };
 
-
-    //bool collide(ZObject object, deth level);
-
-    int getX();
-    int getY();
-    int setPos(int x,int y);
-
-    void moveAvatar();
-
+	void update();
+	QPixmap getImage();
 
 
 
 private:
+
+	Action actionCurrent;
+	Position positionCurrent;
     Zanimator moveDown;
     Zanimator moveLeft;
     Zanimator moveUp;
     Zanimator moveRight;
-    Zanimator attack;
-
-    int x;
-    int y;
-   // int centerX;
-   // int centerY;
+	Zanimator attackDown;
+	Zanimator attackLeft;
+	Zanimator attackUp;
+	Zanimator attackRight;
 
     int speed;
 
+	ZKeyRecorder *keyRecorder;
+	ZMap *map;
 
 
 

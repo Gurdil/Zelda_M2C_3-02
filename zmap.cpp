@@ -1,6 +1,6 @@
 #include "zmap.h"
 
-ZMap::ZMap(Zview *view, ZScene *scene, ZObject *avatar, QString *adress) : view(view), scene(scene), avatar(avatar)
+ZMap::ZMap(Zview *view, ZScene *scene, QString *adress) : view(view), scene(scene)
 {
 	centerX = this->map.width()/2;
 	centerY = this->map.height()/2;
@@ -11,8 +11,21 @@ ZMap::ZMap(Zview *view, ZScene *scene, ZObject *avatar, QString *adress) : view(
 	}
 	centerX = this->map.width()/2;
 	centerY = this->map.height()/2;
+}
 
-	this->avatar->setPos(centerX, centerY);
+int ZMap::getWith()
+{
+	return this->map.width();
+}
+
+int ZMap::getHeight()
+{
+	return this->map.height();
+}
+
+void ZMap::addLiving(ZObject *obj)
+{
+	livings.append(obj);
 }
 
 void ZMap::loadXML(QString &adress)
@@ -172,26 +185,8 @@ void ZMap::paint()
 {
 	this->scene->clear();
 
-	int avatarX = transform(avatar->getX(), point::x);
-	int avatarY =transform(avatar->getY(), point::y);
 
-	if (avatarX > (3*view->viewport()->width()/4))
-	{
-		centerX = avatar->getX() - view->viewport()->width()/4;
-	}
-	else if (avatarX < (view->viewport()->width()/4))
-	{
-		centerX = avatar->getX() + view->viewport()->width()/4;
-	}
 
-	if (avatarY > (3*view->viewport()->height()/4))
-	{
-		centerY = avatar->getY() - view->viewport()->height()/4;
-	}
-	else if (avatarY < (view->viewport()->height()/4))
-	{
-		centerY = avatar->getY() + view->viewport()->height()/4;
-	}
 
 
 	QGraphicsPixmapItem *a = this->scene->addPixmap(map);
@@ -204,9 +199,7 @@ void ZMap::paint()
 				,view->viewport()->height()/2 - centerY);
 
 
-	a = this->scene->addPixmap(this->avatar->getImage());
-	a->setPos(view->viewport()->width()/2 + (avatar->getX() - centerX)
-			  ,view->viewport()->height()/2+ (avatar->getY() - centerY));
+	paintList(livings);
 
 
 
@@ -214,7 +207,7 @@ void ZMap::paint()
 
 bool ZMap::collid(ZObject &object)
 {
-	return (collidList(object, livings) | collidList(object, obstacles));
+	return (collidList(object, obstacles));
 }
 
 bool ZMap::collidList(ZObject &object, QList<ZObject> &list)
@@ -254,6 +247,18 @@ void ZMap::paintList(const QList<ZObject> &list)
 
 }
 
+void ZMap::paintList(QList<ZObject*> list)
+{
+
+	foreach (ZObject *object, list)
+	{
+		QGraphicsPixmapItem *a = this->scene->addPixmap(object->getImage());
+		a->setPos(transform(object->getX(), point::x)
+				  ,transform(object->getY(), point::y));
+	}
+
+}
+
 void ZMap::paintListBoosted(const QList<ZObject> &list, const QList<QGraphicsItem *> &listGraphic)
 {
 	for (int i = 0; i < list.length(); ++i)
@@ -262,5 +267,14 @@ void ZMap::paintListBoosted(const QList<ZObject> &list, const QList<QGraphicsIte
 		ZObject b = list.at(i);
 		a->setPos(transform(b.getX(), point ::x)
 				  ,transform(b.getY(), point::y));
+	}
+}
+
+
+void ZMap::update()
+{
+	foreach (ZObject *object, livings)
+	{
+		object->update();
 	}
 }

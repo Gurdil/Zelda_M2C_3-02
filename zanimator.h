@@ -12,6 +12,7 @@ class Zanimator
 		Zanimator(QList<QString> addresses);
 		Zanimator(QList<QPixmap> pictures);
 		Zanimator(QPixmap picture);
+		Zanimator(){}
 		~Zanimator();
 		QPixmap begin();
 		QPixmap next();

@@ -4,6 +4,7 @@
 #include "zobject.h"
 #include "zscene.h"
 #include "zview.h"
+#include "ZKeyRecorder.h"
 
 #include <QList>
 #include <QPixmap>
@@ -28,9 +29,13 @@
 class ZMap
 {
 public:
-	ZMap(Zview *view, ZScene *scene, ZObject *avatar, QString *file = NULL);
+	ZMap(Zview *view, ZScene *scene, QString *file = NULL);
     void paint();
     bool collid(ZObject &object);
+	int getWith();
+	int getHeight();
+	void addLiving(ZObject *obj);
+	void update();
 
 private:
     QList<ZObject> decors;
@@ -39,7 +44,7 @@ private:
     QList<ZObject> obstacles;
 	QList<QGraphicsItem *> obstaclesGraphic;
 	QPixmap obstacle;
-	QList<ZObject> livings;
+	QList<ZObject*> livings;
     ZScene *scene;
     ZObject *avatar;
     Zview *view;
@@ -57,6 +62,7 @@ private:
 
     int transform(int a, point p);
 	void paintList(const QList<ZObject> &list);
+	void paintList(QList<ZObject*> list);
     bool collidList(ZObject &object, QList<ZObject> &list);
 	void loadXML(QString &file);
 	void load(QDomNodeList &nodes, QList<ZObject> &objects, int tilewidth, int tileheight, int width, int height);

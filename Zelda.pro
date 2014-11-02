@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     zview.cpp \
     ZKeyRecorder.cpp \
     zobject.cpp \
-    zmap.cpp
+    zmap.cpp \
+    zavatar.cpp
 
 HEADERS  += \
     controler.h \

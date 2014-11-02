@@ -21,6 +21,7 @@
 #include "ZKeyRecorder.h"
 #include "zobject.h"
 #include "zmap.h"
+#include "zavatar.h"
 
 class ZControler : public QObject
 {

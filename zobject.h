@@ -23,10 +23,12 @@ public:
     int getY();
     void setPos(int x, int y);
     void setOffset(int x, int y);
-    QPixmap getImage();
+	virtual QPixmap getImage();
+	virtual void update(){}
 
-private:
+protected:
     Zanimator animator;
+	ZObject(){}
     int x;
     int y;
     int offsetX;

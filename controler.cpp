@@ -37,7 +37,9 @@ ZControler::ZControler(QObject *parent) :
     vilain = new ZObject(Zanimator(addresses), avatar->getX()+300, avatar->getY()+300);
 
 	QString adress = QString(":/maptry/maptry2.tmx");
-	map = new ZMap(view,scene,avatar, &adress);
+	map = new ZMap(view,scene, &adress);
+
+	map->addLiving(new ZAvatar(map->getWith()/2, map->getHeight()/2, &keyRecorder, map));
 
 	timerChrono.start();
 }
@@ -104,6 +106,7 @@ void ZControler::updateCaption()
         }
     }
 
+	map->update();
 
     map->paint();
 
