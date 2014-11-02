@@ -4,16 +4,20 @@
 
 #include <stdlib.h>
 
+#include "zanimator.h"
 #include "zobject.h"
 
 class ZAvatar : public ZObject
 {
 public:
+    ZAvatar(int x, int y);
+    ~ZAvatar();
 
     enum action{
         STAND,
         WALK,
         ATTACK,
+        HURT,
         DEAD
     };
 
@@ -31,7 +35,7 @@ public:
     int getY();
     int setPos(int x,int y);
 
-    moveAvatar();
+    void moveAvatar();
 
 
 
