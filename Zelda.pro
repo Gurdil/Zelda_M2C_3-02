@@ -30,7 +30,8 @@ HEADERS  += \
     zview.h \
     ZKeyRecorder.h \
     zobject.h \
-    zmap.h
+    zmap.h \
+    zavatar.h
 
 OTHER_FILES +=
 

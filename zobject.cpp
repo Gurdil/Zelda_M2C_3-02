@@ -9,7 +9,7 @@ bool ZObject::collide(ZObject object, deth level)
     switch (level)
     {
     case innerCircle:
-        return true;
+        return this->innerCircle(object);
         break;
     case outerCircle:
         return true;
@@ -88,6 +88,29 @@ bool ZObject::pixelCollide(ZObject object)
 
 
     return true;
+}
+
+bool ZObject::innerCircleCollide(ZObject object)
+{
+    int x1 = this->x ;
+    int x2 = object.x;
+    int y1 = this->y ;
+    int y2 = object.y;
+    int w1 = this->animator.current().width();
+    int w2 = object.animator.current().width();
+    int h1 = this->animator.current().height();
+    int h2 = object.animator.current().height();
+
+
+    int centerX1 = x1 + w1/2;
+    int centerY1 = y1 + h1/2;
+
+    int centerX2 = x2 + w2/2;
+    int centerY2 = y2 + h2/2;
+
+    bool overlap = sqrt((centerX1 - centerX2)^2 - (centerY1 - centerY2)^2) > (h1/2 + h2/2);
+
+    return overlap;
 }
 
 int ZObject::getX()
