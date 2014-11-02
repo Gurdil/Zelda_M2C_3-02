@@ -18,7 +18,7 @@ ZControler::ZControler(QObject *parent) :
     keyRecorder = ZKeyRecorder();
     this->view = new Zview(keyRecorder);
 	this->var = 0;
-	QTimer *timer = new QTimer(this);
+	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(updateCaption()));
     timer->start(ZInit::frameRate);
 	hop = true;
@@ -38,6 +38,8 @@ ZControler::ZControler(QObject *parent) :
 
 	QString adress = QString(":/maptry/maptry.tmx");
 	map = new ZMap(view,scene,avatar, &adress);
+
+	timerChrono.start();
 }
 
 ZKeyRecorder ZControler::getKeyRecorder()
@@ -47,6 +49,8 @@ ZKeyRecorder ZControler::getKeyRecorder()
 
 void ZControler::updateCaption()
 {
+	timerChrono.start();
+
     int x = this->avatar->getX();
     int y = this->avatar->getY();
 
@@ -104,4 +108,5 @@ void ZControler::updateCaption()
     map->paint();
 
     this->view->viewport()->update();
+	timer->setInterval(ZInit::frameRate-timerChrono.elapsed());
 }

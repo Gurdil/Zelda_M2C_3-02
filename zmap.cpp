@@ -13,7 +13,6 @@ ZMap::ZMap(Zview *view, ZScene *scene, ZObject *avatar, QString *adress) : view(
 	{
 		loadXML(*adress);
 	}
-	myTimer.start();
 }
 
 void ZMap::loadXML(QString &adress)
@@ -98,7 +97,9 @@ void ZMap::loadXML(QString &adress)
 		}
 		if(e.attribute("name") == "Obstacle")
 		{
-			load(e.firstChild().childNodes(), this->obstacles, tilewidth, tileheight, width, height);
+			QDomNodeList nodeList = e.firstChild().childNodes();
+			obstacle = loadPixmap(nodeList, tilewidth, tileheight, width, height);
+			load(nodeList, this->obstacles, tilewidth, tileheight, width, height);
 		}
 	}
 
@@ -142,7 +143,8 @@ void ZMap::load(QDomNodeList &nodes, QList<ZObject> &objects, int tilewidth, int
 QPixmap ZMap::loadPixmap(QDomNodeList &nodes, int tilewidth, int tileheight, int width, int height)
 {
 
-	QImage img( width*tilewidth, height*tileheight ,QImage::Format_RGB32);
+	QImage img( width*tilewidth, height*tileheight , QImage::Format_ARGB32);
+	img.fill(Qt::transparent);
 	QPainter p(&img);
 
 	for (int i = 0; i < nodes.length(); ++i)
@@ -168,9 +170,6 @@ QPixmap ZMap::loadPixmap(QDomNodeList &nodes, int tilewidth, int tileheight, int
 
 void ZMap::paint()
 {
-	//qDebug() << "The update boucle had take" << myTimer.elapsed() << "milliseconds";
-	myTimer.start();
-
 	this->scene->clear();
 
 	int avatarX = transform(avatar->getX(), point::x);
@@ -179,23 +178,19 @@ void ZMap::paint()
 	if (avatarX > (3*view->viewport()->width()/4))
 	{
 		centerX = avatar->getX() - view->viewport()->width()/4;
-		qDebug() << "ViewportMoved";
 	}
 	else if (avatarX < (view->viewport()->width()/4))
 	{
 		centerX = avatar->getX() + view->viewport()->width()/4;
-		qDebug() << "ViewportMoved";
 	}
 
 	if (avatarY > (3*view->viewport()->height()/4))
 	{
 		centerY = avatar->getY() - view->viewport()->height()/4;
-		qDebug() << "ViewportMoved";
 	}
 	else if (avatarY < (view->viewport()->height()/4))
 	{
 		centerY = avatar->getY() - view->viewport()->height()/4;
-		qDebug() << "ViewportMoved";
 	}
 
 
@@ -204,7 +199,9 @@ void ZMap::paint()
 			  ,view->viewport()->height()/2 - centerY);
 
 
-	paintList(obstacles);
+	a = this->scene->addPixmap(obstacle);
+	a->setPos(view->viewport()->width()/2  - centerX
+				,view->viewport()->height()/2 - centerY);
 
 
 	a = this->scene->addPixmap(this->avatar->getImage());

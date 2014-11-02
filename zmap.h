@@ -38,6 +38,7 @@ private:
 	QPixmap map;
     QList<ZObject> obstacles;
 	QList<QGraphicsItem *> obstaclesGraphic;
+	QPixmap obstacle;
 	QList<ZObject> livings;
     ZScene *scene;
     ZObject *avatar;
@@ -47,7 +48,7 @@ private:
 	QList<QPixmap> listImage;
 	int sizeX;
 	int sizeY;
-	QElapsedTimer myTimer;
+
 
     enum point{
         x,

@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
+#include <QElapsedTimer>
 
 #include "zscene.h"
 #include "zview.h"
@@ -44,6 +45,8 @@ class ZControler : public QObject
         ZObject *vilain;
         static ZControler* m_instance;
         ZMap *map;
+		QElapsedTimer timerChrono;
+		QTimer *timer;
 
 
         explicit ZControler(QObject *parent = 0);
