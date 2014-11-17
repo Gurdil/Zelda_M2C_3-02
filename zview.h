@@ -6,6 +6,7 @@
 #include <QDesktopWidget>
 #include <QKeyEvent>
 #include <Qt>
+#include <QAbstractScrollArea>
 
 #include "ZKeyRecorder.h"
 

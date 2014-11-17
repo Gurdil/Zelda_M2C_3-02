@@ -106,7 +106,7 @@ void ZMap::loadXML(QString &adress)
 		QDomElement e = list.at(i).toElement();
 		if(e.attribute("name") == "Decors")
 		{
-			map = loadPixmap(e.firstChild().childNodes(), tilewidth, tileheight, width, height);
+            map = this->loadPixmap(e.firstChild().childNodes(), tilewidth, tileheight, width, height);
 		}
 		if(e.attribute("name") == "Obstacle")
 		{
@@ -153,7 +153,7 @@ void ZMap::load(QDomNodeList &nodes, QList<ZObject> &objects, int tilewidth, int
 	}
 }
 
-QPixmap ZMap::loadPixmap(QDomNodeList &nodes, int tilewidth, int tileheight, int width, int height)
+QPixmap ZMap::loadPixmap(QDomNodeList nodes, int tilewidth, int tileheight, int width, int height)
 {
 
 	QImage img( width*tilewidth, height*tileheight , QImage::Format_ARGB32);
@@ -181,9 +181,34 @@ QPixmap ZMap::loadPixmap(QDomNodeList &nodes, int tilewidth, int tileheight, int
 	return QPixmap::fromImage(img);
 }
 
+void ZMap::setAvatar(ZObject *obj)
+{
+     avatar = obj;
+}
+
 void ZMap::paint()
 {
 	this->scene->clear();
+
+    int avatarX = transform(avatar->getX(), ZMap::x);
+    int avatarY =transform(avatar->getY(), ZMap::y);
+
+    if (avatarX > (3*view->viewport()->width()/4))
+    {
+        centerX = avatar->getX() - view->viewport()->width()/4;
+    }
+    else if (avatarX < (view->viewport()->width()/4))
+    {
+        centerX = avatar->getX() + view->viewport()->width()/4;
+    }
+    if (avatarY > (3*view->viewport()->height()/4))
+    {
+        centerY = avatar->getY() - view->viewport()->height()/4;
+    }
+    else if (avatarY < (view->viewport()->height()/4))
+    {
+        centerY = avatar->getY() + view->viewport()->height()/4;
+    }
 
 
 
@@ -222,14 +247,14 @@ bool ZMap::collidList(ZObject &object, QList<ZObject> &list)
 	return false;
 }
 
-int ZMap::transform(int a, point p)
+int ZMap::transform(int a, ZMap::point p)
 {
 	switch (p)
 	{
-		case point::x:
+        case ZMap::x:
 			return view->viewport()->width()/2 + (a - centerX);
 			break;
-		case point::y:
+        case ZMap::y:
 			return view->viewport()->height()/2+ (a - centerY);
 			break;
 	}
@@ -241,8 +266,8 @@ void ZMap::paintList(const QList<ZObject> &list)
 	foreach (ZObject object, list)
 	{
 		QGraphicsPixmapItem *a = this->scene->addPixmap(object.getImage());
-		a->setPos(transform(object.getX(), point::x)
-				  ,transform(object.getY(), point::y));
+        a->setPos(transform(object.getX(), ZMap::x)
+                  ,transform(object.getY(), ZMap::y));
 	}
 
 }
@@ -253,8 +278,8 @@ void ZMap::paintList(QList<ZObject*> list)
 	foreach (ZObject *object, list)
 	{
 		QGraphicsPixmapItem *a = this->scene->addPixmap(object->getImage());
-		a->setPos(transform(object->getX(), point::x)
-				  ,transform(object->getY(), point::y));
+        a->setPos(transform(object->getX(), ZMap::x)
+                  ,transform(object->getY(), ZMap::y));
 	}
 
 }
@@ -265,8 +290,8 @@ void ZMap::paintListBoosted(const QList<ZObject> &list, const QList<QGraphicsIte
 	{
 		QGraphicsItem *a = listGraphic.at(i);
 		ZObject b = list.at(i);
-		a->setPos(transform(b.getX(), point ::x)
-				  ,transform(b.getY(), point::y));
+        a->setPos(transform(b.getX(), ZMap ::x)
+                  ,transform(b.getY(), ZMap::y));
 	}
 }
 

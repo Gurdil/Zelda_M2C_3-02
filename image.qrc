@@ -21,8 +21,8 @@
         <file>herbe2.png</file>
         <file>rocher.png</file>
         <file>maptry2.tmx</file>
-        <file>Arbre.png</file>
         <file>Montain.png</file>
+        <file>arbre.png</file>
     </qresource>
     <qresource prefix="/avatar">
         <file>walkD1.png</file>

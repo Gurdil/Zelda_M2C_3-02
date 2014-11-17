@@ -35,6 +35,7 @@ public:
 	int getWith();
 	int getHeight();
 	void addLiving(ZObject *obj);
+    void setAvatar(ZObject *obj);
 	void update();
 
 private:
@@ -66,7 +67,7 @@ private:
     bool collidList(ZObject &object, QList<ZObject> &list);
 	void loadXML(QString &file);
 	void load(QDomNodeList &nodes, QList<ZObject> &objects, int tilewidth, int tileheight, int width, int height);
-	QPixmap loadPixmap(QDomNodeList &nodes, int tilewidth, int tileheight, int width, int height);
+    QPixmap loadPixmap(QDomNodeList nodes, int tilewidth, int tileheight, int width, int height);
 	void paintListBoosted(const QList<ZObject> &list, const QList<QGraphicsItem *> &listGraphic);
 };
 

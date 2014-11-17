@@ -8,8 +8,8 @@ ZAvatar::ZAvatar(int x, int y, ZKeyRecorder *keyRecorder, ZMap *map)
 	this->keyRecorder = keyRecorder;
 	this->map = map;
 	speed = 10;
-	actionCurrent = Action::STAND;
-	positionCurrent = Position::DOWN;
+    actionCurrent = ZAvatar::STAND;
+    positionCurrent = ZAvatar::DOWN;
 
 	QList<QString> list = QList<QString>();
 
@@ -95,17 +95,17 @@ void ZAvatar::update()
 		}
 		else
 		{
-			if ((positionCurrent != Position::UP) )
+            if ((positionCurrent != ZAvatar::UP) )
 			{
-				positionCurrent = Position::UP;
-				actionCurrent = Action::WALK;
+                positionCurrent = ZAvatar::UP;
+                actionCurrent = ZAvatar::WALK;
 				animator = moveUp;
 			}
 			y--;
 		}
 
 	}
-	if (keyRecorder->readkey() & ZInit::down)
+    else if (keyRecorder->readkey() & ZInit::down)
 	{
 		this->setPos(x,y+1);
 		if (map->collid(*this))
@@ -114,16 +114,16 @@ void ZAvatar::update()
 		}
 		else
 		{
-			if ((positionCurrent != Position::DOWN))
+            if ((positionCurrent != ZAvatar::DOWN))
 			{
-				positionCurrent = Position::DOWN;
-				actionCurrent = Action::WALK;
+                positionCurrent = ZAvatar::DOWN;
+                actionCurrent = ZAvatar::WALK;
 				animator = moveDown;
 			}
 			y++;
 		}
 	}
-	if (keyRecorder->readkey() & ZInit::right)
+    else if (keyRecorder->readkey() & ZInit::right)
 	{
 		this->setPos(x+1,y);
 		if (map->collid(*this))
@@ -132,16 +132,16 @@ void ZAvatar::update()
 		}
 		else
 		{
-			if ((positionCurrent != Position::RIGHT))
+            if ((positionCurrent != ZAvatar::RIGHT))
 			{
-				positionCurrent = Position::RIGHT;
-				actionCurrent = Action::WALK;
+                positionCurrent = ZAvatar::RIGHT;
+                actionCurrent = ZAvatar::WALK;
 				animator = moveRight;
 			}
 			x++;
 		}
 	}
-	if (keyRecorder->readkey() & ZInit::left)
+    else if (keyRecorder->readkey() & ZInit::left)
 	{
 		this->setPos(x-1,y);
 		if (map->collid(*this))
@@ -150,10 +150,10 @@ void ZAvatar::update()
 		}
 		else
 		{
-			if ((positionCurrent != Position::LEFT))
+            if ((positionCurrent != ZAvatar::LEFT))
 			{
-				positionCurrent = Position::LEFT;
-				actionCurrent = Action::WALK;
+                positionCurrent = ZAvatar::LEFT;
+                actionCurrent = ZAvatar::WALK;
 				animator = moveLeft;
 			}
 			x--;
@@ -163,7 +163,7 @@ void ZAvatar::update()
 
 QPixmap ZAvatar::getImage()
 {
-	if(actionCurrent == Action::STAND)
+    if(actionCurrent == ZAvatar::STAND)
 	{
 		return this->animator.begin();
 	}

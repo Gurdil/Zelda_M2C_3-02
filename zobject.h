@@ -2,6 +2,7 @@
 #define ZOBJECT_H
 
 #include <stdlib.h>
+#include <QtMath>
 
 #include "zanimator.h"
 #include "zinit.h"

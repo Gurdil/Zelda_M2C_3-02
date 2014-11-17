@@ -108,7 +108,7 @@ bool ZObject::innerCircleCollide(ZObject object)
     int centerX2 = x2 + w2/2;
     int centerY2 = y2 + h2/2;
 
-    bool overlap = sqrt((centerX1 - centerX2)^2 - (centerY1 - centerY2)^2) > (h1/2 + h2/2);
+    bool overlap = qSqrt((centerX1 - centerX2)^2 - (centerY1 - centerY2)^2) > (h1/2 + h2/2);
 
     return overlap;
 }

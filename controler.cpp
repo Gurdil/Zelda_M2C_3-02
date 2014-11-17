@@ -39,7 +39,9 @@ ZControler::ZControler(QObject *parent) :
 	QString adress = QString(":/maptry/maptry2.tmx");
 	map = new ZMap(view,scene, &adress);
 
-	map->addLiving(new ZAvatar(map->getWith()/2, map->getHeight()/2, &keyRecorder, map));
+    avatar = new ZAvatar(map->getWith()/2, map->getHeight()/2, &keyRecorder, map);
+    map->addLiving(avatar);
+    map->setAvatar(avatar);
 
 	timerChrono.start();
 }
@@ -53,58 +55,58 @@ void ZControler::updateCaption()
 {
 	timerChrono.start();
 
-    int x = this->avatar->getX();
-    int y = this->avatar->getY();
+//    int x = this->avatar->getX();
+//    int y = this->avatar->getY();
 
-    if (keyRecorder.readkey() & ZInit::up)
-    {
-        this->avatar->setPos(x, y-1);
-        if (map->collid(*avatar))
-        {
-            this->avatar->setPos(x, y);
-        }
-        else
-        {
-            y--;
-        }
+//    if (keyRecorder.readkey() & ZInit::up)
+//    {
+//        this->avatar->setPos(x, y-1);
+//        if (map->collid(*avatar))
+//        {
+//            this->avatar->setPos(x, y);
+//        }
+//        else
+//        {
+//            y--;
+//        }
 
-    }
-    if (keyRecorder.readkey() & ZInit::down)
-    {
-        this->avatar->setPos(x,y+1);
-        if (map->collid(*avatar))
-        {
-            this->avatar->setPos(x, y);
-        }
-        else
-        {
-            y++;
-        }
-    }
-    if (keyRecorder.readkey() & ZInit::right)
-    {
-        this->avatar->setPos(x+1,y);
-        if (map->collid(*avatar))
-        {
-            this->avatar->setPos(x, y);
-        }
-        else
-        {
-            x++;
-        }
-    }
-    if (keyRecorder.readkey() & ZInit::left)
-    {
-        this->avatar->setPos(x-1,y);
-        if (map->collid(*avatar))
-        {
-            this->avatar->setPos(x, y);
-        }
-        else
-        {
-            x--;
-        }
-    }
+//    }
+//    if (keyRecorder.readkey() & ZInit::down)
+//    {
+//        this->avatar->setPos(x,y+1);
+//        if (map->collid(*avatar))
+//        {
+//            this->avatar->setPos(x, y);
+//        }
+//        else
+//        {
+//            y++;
+//        }
+//    }
+//    if (keyRecorder.readkey() & ZInit::right)
+//    {
+//        this->avatar->setPos(x+1,y);
+//        if (map->collid(*avatar))
+//        {
+//            this->avatar->setPos(x, y);
+//        }
+//        else
+//        {
+//            x++;
+//        }
+//    }
+//    if (keyRecorder.readkey() & ZInit::left)
+//    {
+//        this->avatar->setPos(x-1,y);
+//        if (map->collid(*avatar))
+//        {
+//            this->avatar->setPos(x, y);
+//        }
+//        else
+//        {
+//            x--;
+//        }
+//    }
 
 	map->update();
 
